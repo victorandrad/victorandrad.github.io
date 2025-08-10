@@ -31,10 +31,7 @@ export default function Footer({ sharedBasicInfo }: FooterProps) {
         <div className="copyright py-4 text-center">
           <div className="container">
             <small>
-              Copyright &copy;{" "}
-              {sharedBasicInfo
-                ? sharedBasicInfo.name
-                : "???"} - Building in React <span className="iconify" data-icon="cib:typescript" data-inline="false"></span>
+              Copyright &copy;{new Date().getFullYear()} - {sharedBasicInfo ? sharedBasicInfo.name : "???"}
             </small>
           </div>
         </div>
