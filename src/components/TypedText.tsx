@@ -36,7 +36,9 @@ const TypedText: React.FC<TypedTextProps> = ({
     }
 
     return () => {
-      typed.current?.destroy();
+      if (typed.current && typeof typed.current.destroy === 'function') {
+        typed.current.destroy();
+      }
     };
   }, [strings, loop, typeSpeed, backSpeed, backDelay]);
 

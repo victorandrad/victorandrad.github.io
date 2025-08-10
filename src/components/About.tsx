@@ -26,7 +26,7 @@ export default function About({ sharedBasicInfo, resumeBasicInfo }: AboutProps) 
   }, [sharedBasicInfo, resumeBasicInfo]);
 
   return (
-    <section id="about">
+    <section id="about" data-testid="about-section">
       <div className="col-md-12">
         <h1 style={{ color: "black" }}>
           <span>{sectionName}</span>
