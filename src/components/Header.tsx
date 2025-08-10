@@ -1,6 +1,7 @@
-import { ReactTypical } from "@deadcoder0904/react-typical";
 import React, { useEffect, useState } from "react";
 import ReactSwitch from "react-switch";
+import TypedText from "./TypedText";
+import { Icon } from '@iconify/react';
 
 interface HeaderProps {
   sharedData: any;
@@ -9,13 +10,13 @@ interface HeaderProps {
 
 export default function Header({ sharedData }: HeaderProps) {
   const [name, setName] = useState('');
-  const [titles, setTitles] = useState([]);
+  const [titles, setTitles] = useState<string[]>([]);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     if (sharedData) {
       setName(sharedData.name);
-      setTitles(sharedData.titles.map((x: any) => [x.toUpperCase(), 1500]).flat());
+      setTitles(sharedData.titles.map((x: string) => x.toUpperCase()));
     }
   }, [sharedData]);
 
@@ -33,7 +34,15 @@ export default function Header({ sharedData }: HeaderProps) {
   }
 
   const HeaderTitleTypeAnimation = React.memo(() => {
-    return <ReactTypical style={{ marginTop: 0, marginBottom: 11 }} className="title-styles" steps={titles} loop={50} />
+    return <TypedText 
+      strings={titles}
+      style={{ marginTop: 0, marginBottom: 11 }}
+      className="title-styles"
+      loop={true}
+      typeSpeed={70}
+      backSpeed={50}
+      backDelay={1500}
+    />;
   }, (props, prevProp) => true);
 
   return (
@@ -41,10 +50,10 @@ export default function Header({ sharedData }: HeaderProps) {
       <div className="row aligner" style={{ height: '100%' }}>
         <div className="col-md-12">
           <div>
-            <span className="iconify header-icon" data-icon="la:laptop-code" data-inline="false"></span>
+            <Icon icon="la:laptop-code" className="header-icon" />
             <br />
             <h1 className="mb-0">
-              <ReactTypical steps={[name]} wrapper="p" />
+              <TypedText strings={[name]} loop={false} typeSpeed={100} />
             </h1>
             <div className="title-container">
               <HeaderTitleTypeAnimation />
@@ -57,12 +66,9 @@ export default function Header({ sharedData }: HeaderProps) {
               className="react-switch mx-auto"
               width={90}
               height={40}
-
               uncheckedIcon={
-                <span
-                  className="iconify"
-                  data-icon="twemoji:owl"
-                  data-inline="false"
+                <Icon
+                  icon="twemoji:owl"
                   style={{
                     display: "block",
                     height: "100%",
@@ -71,13 +77,11 @@ export default function Header({ sharedData }: HeaderProps) {
                     marginLeft: "20px",
                     color: "#353239",
                   }}
-                ></span>
+                />
               }
               checkedIcon={
-                <span
-                  className="iconify"
-                  data-icon="noto-v1:sun-with-face"
-                  data-inline="false"
+                <Icon
+                  icon="noto:sun-with-face"
                   style={{
                     display: "block",
                     height: "100%",
@@ -86,7 +90,7 @@ export default function Header({ sharedData }: HeaderProps) {
                     marginLeft: "10px",
                     color: "#353239",
                   }}
-                ></span>
+                />
               }
               id="icon-switch"
             />

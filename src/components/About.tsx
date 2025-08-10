@@ -1,7 +1,5 @@
-import angularIcon from "@iconify/icons-logos/angular-icon";
-import phpIcon from "@iconify/icons-logos/php";
-import reactIcon from "@iconify/icons-logos/react";
-import Icon from "@iconify/react";
+// Removendo imports dos ícones - usando strings diretas
+import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 
 interface AboutProps {
@@ -43,15 +41,15 @@ export default function About({ sharedBasicInfo, resumeBasicInfo }: AboutProps) 
                   alt="Avatar placeholder"
                 />
                 <Icon
-                  icon={angularIcon}
+                  icon="logos:angular"
                   style={{ fontSize: "400%", margin: "9% 5% 0 5%" }}
                 />
                 <Icon
-                  icon={reactIcon}
+                  icon="logos:react"
                   style={{ fontSize: "400%", margin: "9% 5% 0 5%" }}
                 />
                 <Icon
-                  icon={phpIcon}
+                  icon="logos:php"
                   style={{ fontSize: "400%", margin: "9% 5% 0 5%" }}
                 />
               </span>
