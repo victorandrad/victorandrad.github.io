@@ -6,19 +6,25 @@
     <meta name="theme-color" content="#16a34a" />
 
     <!-- Primary SEO -->
-    <title>Victor Andrade — Desenvolvedor Front-end & Back-end</title>
+    <title>Victor Andrade — Criação de Sites em Salto/SP e região | Desenvolvedor Web</title>
     <meta
       name="description"
-      content="Portfólio de Victor Andrade — desenvolvedor front-end e back-end com 8+ anos criando aplicações web e mobile em React, Angular, TypeScript, PHP e MySQL."
+      content="Criação de sites em Salto/SP — sites institucionais, e-commerce e sistemas web para empresas em Salto, Itu, Indaiatuba, Sorocaba, Jundiaí e região. Victor Andrade, desenvolvedor full-stack com 8+ anos de experiência."
     />
     <meta
       name="keywords"
-      content="Victor Andrade, desenvolvedor front-end, desenvolvedor back-end, programador, React, Angular, TypeScript, JavaScript, PHP, MySQL, portfolio, Brasil"
+      content="criação de sites Salto SP, criação de sites Salto, desenvolvedor web Salto SP, sites institucionais Salto, e-commerce Salto, sistemas web Salto, criação de sites Itu, criação de sites Indaiatuba, criação de sites Sorocaba, desenvolvedor freelancer Salto, Victor Andrade, programador Salto SP, web designer Salto"
     />
     <meta name="author" content="Victor Andrade" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://victorandra.de/" />
+
+    <!-- Geo targeting (legacy but still picked by some indexers + Bing) -->
+    <meta name="geo.region" content="BR-SP" />
+    <meta name="geo.placename" content="Salto, São Paulo, Brasil" />
+    <meta name="geo.position" content="-23.2009;-47.2876" />
+    <meta name="ICBM" content="-23.2009, -47.2876" />
 
     <!-- Icons & PWA -->
     <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
@@ -28,22 +34,22 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:site_name" content="Victor Andrade" />
-    <meta property="og:title" content="Victor Andrade — Desenvolvedor Front-end & Back-end" />
+    <meta property="og:site_name" content="Victor Andrade — Criação de Sites" />
+    <meta property="og:title" content="Criação de Sites em Salto/SP e região — Victor Andrade" />
     <meta
       property="og:description"
-      content="Portfólio de Victor Andrade — desenvolvedor front-end e back-end com 8+ anos criando aplicações web e mobile em React, Angular, TypeScript, PHP e MySQL."
+      content="Sites institucionais, e-commerce e sistemas web sob medida em Salto/SP, Itu, Indaiatuba, Sorocaba e região. 8+ anos criando soluções com React, Angular, TypeScript, PHP."
     />
     <meta property="og:url" content="https://victorandra.de/" />
     <meta property="og:image" content="https://victorandra.de/favicon.svg" />
-    <meta property="og:image:alt" content="Logo do portfólio de Victor Andrade" />
+    <meta property="og:image:alt" content="Logo do portfólio de Victor Andrade — criação de sites em Salto/SP" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Victor Andrade — Desenvolvedor Front-end & Back-end" />
+    <meta name="twitter:title" content="Criação de Sites em Salto/SP — Victor Andrade" />
     <meta
       name="twitter:description"
-      content="Portfólio de Victor Andrade — desenvolvedor front-end e back-end com 8+ anos criando aplicações web e mobile."
+      content="Sites institucionais, e-commerce e sistemas web em Salto, Itu, Indaiatuba, Sorocaba e região. Desenvolvedor full-stack."
     />
     <meta name="twitter:image" content="https://victorandra.de/favicon.svg" />
 
@@ -62,26 +68,105 @@
       })();
     </script>
 
-    <!-- Structured data: Person schema -->
+    <!-- Structured data: Person + ProfessionalService (local business) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Victor Andrade",
-        "alternateName": "Victor Andrade Ferreira",
-        "url": "https://victorandra.de/",
-        "image": "https://victorandra.de/favicon.svg",
-        "jobTitle": "Desenvolvedor Front-end & Back-end",
-        "description": "Desenvolvedor full-stack com 8+ anos de experiência em React, Angular, TypeScript, PHP e MySQL.",
-        "knowsAbout": ["React", "Angular", "TypeScript", "JavaScript", "PHP", "MySQL", "Sass", "Bootstrap", "HTML5", "CSS3"],
-        "sameAs": [
-          "https://github.com/victorandrad",
-          "https://www.instagram.com/victorandra.de"
-        ],
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Grupo GFT"
-        }
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://victorandra.de/#victor",
+            "name": "Victor Andrade",
+            "alternateName": "Victor Andrade Ferreira",
+            "url": "https://victorandra.de/",
+            "image": "https://victorandra.de/favicon.svg",
+            "jobTitle": "Desenvolvedor Front-end & Back-end",
+            "description": "Desenvolvedor full-stack com 8+ anos de experiência. Cria sites institucionais, e-commerce e sistemas web para empresas em Salto/SP e região.",
+            "knowsAbout": ["React", "Angular", "TypeScript", "JavaScript", "PHP", "MySQL", "Sass", "Bootstrap", "HTML5", "CSS3", "Criação de Sites", "Desenvolvimento Web", "E-commerce"],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Salto",
+              "addressRegion": "SP",
+              "addressCountry": "BR"
+            },
+            "sameAs": [
+              "https://github.com/victorandrad",
+              "https://www.instagram.com/victorandra.de"
+            ],
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Grupo GFT"
+            }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://victorandra.de/#service",
+            "name": "Victor Andrade — Criação de Sites",
+            "url": "https://victorandra.de/",
+            "image": "https://victorandra.de/favicon.svg",
+            "description": "Criação de sites institucionais, e-commerce e sistemas web sob medida em Salto/SP, Itu, Indaiatuba, Sorocaba e região.",
+            "provider": { "@id": "https://victorandra.de/#victor" },
+            "areaServed": [
+              { "@type": "City", "name": "Salto", "containedInPlace": { "@type": "State", "name": "São Paulo" } },
+              { "@type": "City", "name": "Itu" },
+              { "@type": "City", "name": "Indaiatuba" },
+              { "@type": "City", "name": "Sorocaba" },
+              { "@type": "City", "name": "Jundiaí" },
+              { "@type": "City", "name": "Campinas" }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Salto",
+              "addressRegion": "SP",
+              "addressCountry": "BR"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": -23.2009,
+              "longitude": -47.2876
+            },
+            "priceRange": "$$",
+            "serviceType": "Desenvolvimento Web",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Serviços",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Sites Institucionais",
+                    "description": "Sites institucionais sob medida para empresas — apresentação, contato, sobre, blog."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "E-commerce",
+                    "description": "Lojas virtuais e plataformas de venda online."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Sistemas Web",
+                    "description": "Plataformas, dashboards e ferramentas web customizadas."
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://victorandra.de/#website",
+            "url": "https://victorandra.de/",
+            "name": "Victor Andrade — Criação de Sites em Salto/SP",
+            "publisher": { "@id": "https://victorandra.de/#victor" },
+            "inLanguage": "pt-BR"
+          }
+        ]
       }
     </script>
 
