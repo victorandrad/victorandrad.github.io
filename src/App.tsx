@@ -33,10 +33,12 @@ export default function App() {
   useEffect(() => {
     if (languageTag === primaryLanguage) {
       setLanguage('res_primaryLanguage.json');
+      document.documentElement.setAttribute('lang', 'pt-BR');
       document.getElementById(primaryLanguageIconId)?.setAttribute("filter", "brightness(40%)");
       document.getElementById(secondaryLanguageIconId)?.setAttribute("filter", "brightness(100%)");
     } else if (languageTag === secondaryLanguage) {
       setLanguage('res_secondaryLanguage.json');
+      document.documentElement.setAttribute('lang', 'en-US');
       document.getElementById(secondaryLanguageIconId)?.setAttribute("filter", "brightness(40%)");
       document.getElementById(primaryLanguageIconId)?.setAttribute("filter", "brightness(100%)");
     }
