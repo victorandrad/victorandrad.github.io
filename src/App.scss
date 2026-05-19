@@ -63,7 +63,7 @@
   --ext-log:  #e8632d;  /* log orange */
 }
 
-body[data-theme='dark'] {
+[data-theme='dark'] {
   --bg: #0a0a0c;
   --bg-soft: #0f0f12;
   --surface: #131316;
@@ -95,7 +95,56 @@ body[data-theme='dark'] {
 /* ===========================================================
    Base
    =========================================================== */
-html { font-size: 62.5%; background: var(--bg); scroll-padding-top: var(--scroll-offset); }
+html {
+  font-size: 62.5%;
+  background: var(--bg);
+  scroll-padding-top: var(--scroll-offset);
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* WebKit (Chrome / Safari / Edge / Opera) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border: 3px solid var(--bg);
+  border-radius: var(--radius-full);
+  background-clip: padding-box;
+  min-height: 40px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-muted);
+  background-clip: padding-box;
+  border: 3px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--ink-3);
+  background-clip: padding-box;
+  border: 3px solid var(--bg);
+}
+
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* Sidebar scrollbar: matches the surface background instead of page bg */
+.sidebar::-webkit-scrollbar-thumb {
+  border-color: var(--surface);
+}
+.sidebar::-webkit-scrollbar-thumb:hover,
+.sidebar::-webkit-scrollbar-thumb:active {
+  border-color: var(--surface);
+}
+.sidebar { scrollbar-color: var(--border-strong) transparent; }
 
 #about, #portfolio, #skills, #resume, #home {
   scroll-margin-top: var(--scroll-offset);
@@ -1816,15 +1865,15 @@ header h1.hero-name {
   overscroll-behavior: contain;
 }
 
-/* Custom scrollbar inside the modal */
-.project-modal-scroll::-webkit-scrollbar { width: 10px; }
-.project-modal-scroll::-webkit-scrollbar-track { background: transparent; }
+/* Modal scrollbar: borders match surface (panel bg) instead of page bg */
+.project-modal-scroll { scrollbar-color: var(--border-strong) transparent; }
 .project-modal-scroll::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: var(--radius-full);
-  border: 2px solid var(--surface);
+  border-color: var(--surface);
 }
-.project-modal-scroll::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
+.project-modal-scroll::-webkit-scrollbar-thumb:hover,
+.project-modal-scroll::-webkit-scrollbar-thumb:active {
+  border-color: var(--surface);
+}
 
 .project-modal-head {
   display: flex;

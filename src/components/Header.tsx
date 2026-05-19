@@ -43,8 +43,10 @@ export default function Header({ sharedData }: HeaderProps) {
 
   function setTheme() {
     const body = document.body;
+    const html = document.documentElement;
     const newTheme = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
     body.setAttribute("data-theme", newTheme);
+    html.setAttribute("data-theme", newTheme);
   }
 
   const HeaderTitleTypeAnimation = React.memo(() => {

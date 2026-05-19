@@ -27,8 +27,8 @@ img {
 }
 
 ::selection {
-  background: #ddd6fe;
-  color: #1e1b4b;
+  background: rgba(22, 163, 74, 0.25);
+  color: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
