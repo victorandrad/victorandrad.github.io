@@ -87,7 +87,7 @@ export default function Header({ sharedData }: HeaderProps) {
       </div>
 
       <h1 className="hero-name">
-        <TypedText strings={[name]} loop={false} typeSpeed={100} />
+        <TypedText strings={[name]} loop={false} typeSpeed={100} once />
       </h1>
 
       <div className="hero-role title-container">

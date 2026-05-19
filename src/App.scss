@@ -2260,7 +2260,9 @@ header h1.hero-name {
 
   .hero-name,
   header h1.hero-name {
-    font-size: clamp(3.4rem, 13vw, 5.4rem) !important;
+    font-size: clamp(2.6rem, 10vw, 4.2rem) !important;
+    letter-spacing: -0.045em !important;
+    line-height: 1 !important;
   }
 
   .title-styles { font-size: 1.15rem !important; }
