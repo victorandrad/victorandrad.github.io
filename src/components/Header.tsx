@@ -23,10 +23,33 @@ function formatUptime(from: Date, to: Date = new Date()): string {
   return `${years}y ${months}mo`;
 }
 
+function getSystemPrefersDark(): boolean {
+  try {
+    return typeof window !== 'undefined'
+      && typeof window.matchMedia === 'function'
+      && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  } catch {
+    return false;
+  }
+}
+
+function getInitialTheme(): 'light' | 'dark' {
+  try {
+    const stored = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
+    if (stored === 'light' || stored === 'dark') return stored;
+  } catch { /* ignore */ }
+  return getSystemPrefersDark() ? 'dark' : 'light';
+}
+
+function applyTheme(theme: 'light' | 'dark') {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.body.setAttribute('data-theme', theme);
+}
+
 export default function Header({ sharedData }: HeaderProps) {
   const [name, setName] = useState('');
   const [titles, setTitles] = useState<string[]>([]);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<boolean>(() => getInitialTheme() === 'dark');
   const uptime = formatUptime(CAREER_START);
 
   useEffect(() => {
@@ -36,17 +59,42 @@ export default function Header({ sharedData }: HeaderProps) {
     }
   }, [sharedData]);
 
-  function onThemeSwitchChange(checked: any) {
-    setChecked(checked);
-    setTheme();
-  }
+  // Apply the initial theme to the DOM on mount (in case the inline boot script didn't)
+  useEffect(() => {
+    applyTheme(checked ? 'dark' : 'light');
+    // intentionally only on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  function setTheme() {
-    const body = document.body;
-    const html = document.documentElement;
-    const newTheme = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    body.setAttribute("data-theme", newTheme);
-    html.setAttribute("data-theme", newTheme);
+  // Listen for OS theme changes — only follow when user hasn't manually overridden
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e: MediaQueryListEvent) => {
+      try {
+        if (localStorage.getItem('theme')) return; // manual override wins
+      } catch { /* ignore */ }
+      setChecked(e.matches);
+      applyTheme(e.matches ? 'dark' : 'light');
+    };
+    if (typeof mql.addEventListener === 'function') {
+      mql.addEventListener('change', handler);
+      return () => mql.removeEventListener('change', handler);
+    }
+    // Safari < 14 fallback
+    // @ts-ignore
+    mql.addListener(handler);
+    // @ts-ignore
+    return () => mql.removeListener(handler);
+  }, []);
+
+  function onThemeSwitchChange(next: boolean) {
+    setChecked(next);
+    const theme: 'light' | 'dark' = next ? 'dark' : 'light';
+    applyTheme(theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch { /* ignore */ }
   }
 
   const HeaderTitleTypeAnimation = React.memo(() => {
