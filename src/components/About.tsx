@@ -1,4 +1,3 @@
-// Removendo imports dos ícones - usando strings diretas
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 
@@ -26,74 +25,42 @@ export default function About({ sharedBasicInfo, resumeBasicInfo }: AboutProps) 
   }, [sharedBasicInfo, resumeBasicInfo]);
 
   return (
-    <section id="about" data-testid="about-section">
-      <div className="col-md-12">
-        <h1 style={{ color: "black" }}>
-          <span>{sectionName}</span>
-        </h1>
-        <div className="row center mx-auto mb-5">
-          <div className="col-md-4 mb-5 center">
-            <div className="polaroid">
-              <span style={{ cursor: "auto" }}>
-                <img
-                  height="250px"
-                  src={profilepic}
-                  alt="Avatar placeholder"
-                />
-                <Icon
-                  icon="logos:angular"
-                  style={{ fontSize: "400%", margin: "9% 5% 0 5%" }}
-                />
-                <Icon
-                  icon="logos:react"
-                  style={{ fontSize: "400%", margin: "9% 5% 0 5%" }}
-                />
-                <Icon
-                  icon="logos:php"
-                  style={{ fontSize: "400%", margin: "9% 5% 0 5%" }}
-                />
-              </span>
-            </div>
-          </div>
+    <section id="about" data-testid="about-section" className="card card-about">
+      <header className="card-head">
+        <span className="card-file">
+          <span className="card-file-icon">#</span>
+          <span className="card-file-name">about.md</span>
+        </span>
+        <span className="card-num">01</span>
+        <h1 className="card-title"><span>{sectionName}</span></h1>
+        <span className="card-tag">MARKDOWN</span>
+      </header>
 
-          <div className="col-md-8 center">
-            <div className="col-md-10">
-              <div className="card">
-                <div className="card-header">
-                  <span
-                    className="iconify"
-                    data-icon="emojione:red-circle"
-                    data-inline="false"
-                  ></span>{" "}
-                  &nbsp;{" "}
-                  <span
-                    className="iconify"
-                    data-icon="twemoji:yellow-circle"
-                    data-inline="false"
-                  ></span>{" "}
-                  &nbsp;{" "}
-                  <span
-                    className="iconify"
-                    data-icon="twemoji:green-circle"
-                    data-inline="false"
-                  ></span>
-                </div>
-                <div
-                  className="card-body font-trebuchet text-justify ml-3 mr-3"
-                  style={{
-                    height: "auto",
-                    fontSize: "132%",
-                    lineHeight: "200%",
-                  }}
-                >
-                  <br />
-                  <span className="wave">{hello} :) </span>
-                  <br />
-                  <br />
-                  {about}
-                </div>
-              </div>
-            </div>
+      <div className="card-body about-body">
+        <div className="about-avatar-wrap">
+          <img
+            className="about-avatar"
+            height="250px"
+            src={profilepic}
+            alt="Avatar placeholder"
+          />
+          <div className="about-avatar-meta">
+            <span className="mono">avatar.png</span>
+            <span className="mono muted">240x240 · 6kb</span>
+          </div>
+        </div>
+
+        <div className="about-text">
+          <p className="about-hello">
+            <span className="wave">{hello} :)</span>
+          </p>
+          <p className="about-description">{about}</p>
+
+          <div className="about-stack">
+            <span className="about-stack-label">$ stack --primary</span>
+            <Icon icon="logos:angular" className="about-stack-icon" />
+            <Icon icon="logos:react" className="about-stack-icon" />
+            <Icon icon="logos:php" className="about-stack-icon" />
           </div>
         </div>
       </div>

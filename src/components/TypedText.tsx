@@ -24,9 +24,10 @@ const TypedText: React.FC<TypedTextProps> = ({
   const typed = useRef<Typed | null>(null);
 
   useEffect(() => {
-    if (el.current) {
+    const validStrings = strings?.filter(s => typeof s === 'string' && s.length > 0) ?? [];
+    if (el.current && validStrings.length > 0) {
       typed.current = new Typed(el.current, {
-        strings,
+        strings: validStrings,
         typeSpeed,
         backSpeed,
         backDelay,

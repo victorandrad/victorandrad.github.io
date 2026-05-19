@@ -8,10 +8,26 @@ interface HeaderProps {
   checked?: any;
 }
 
+// Career start — used to compute the uptime shown in the hero
+const CAREER_START = new Date(2018, 6, 1); // July 2018
+
+function formatUptime(from: Date, to: Date = new Date()): string {
+  let years = to.getFullYear() - from.getFullYear();
+  let months = to.getMonth() - from.getMonth();
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+  if (years < 1) return `${months}mo`;
+  if (months === 0) return `${years}y`;
+  return `${years}y ${months}mo`;
+}
+
 export default function Header({ sharedData }: HeaderProps) {
   const [name, setName] = useState('');
   const [titles, setTitles] = useState<string[]>([]);
   const [checked, setChecked] = useState(false);
+  const uptime = formatUptime(CAREER_START);
 
   useEffect(() => {
     if (sharedData) {
@@ -21,22 +37,20 @@ export default function Header({ sharedData }: HeaderProps) {
   }, [sharedData]);
 
   function onThemeSwitchChange(checked: any) {
-    setChecked(checked)
+    setChecked(checked);
     setTheme();
   }
 
   function setTheme() {
-    let dataThemeAttribute = "data-theme";
-    let body = document.body;
-    let newTheme =
-      body.getAttribute(dataThemeAttribute) === "dark" ? "light" : "dark";
-    body.setAttribute(dataThemeAttribute, newTheme);
+    const body = document.body;
+    const newTheme = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    body.setAttribute("data-theme", newTheme);
   }
 
   const HeaderTitleTypeAnimation = React.memo(() => {
-    return <TypedText 
+    return <TypedText
       strings={titles}
-      style={{ marginTop: 0, marginBottom: 11 }}
+      style={{ marginTop: 0, marginBottom: 0 }}
       className="title-styles"
       loop={true}
       typeSpeed={70}
@@ -46,55 +60,63 @@ export default function Header({ sharedData }: HeaderProps) {
   }, (props, prevProp) => true);
 
   return (
-    <header id="home" style={{ height: window.innerHeight - 140, display: 'block' }}>
-      <div className="row aligner" style={{ height: '100%' }}>
-        <div className="col-md-12">
-          <div>
-            <Icon icon="la:laptop-code" className="header-icon" />
-            <br />
-            <h1 className="mb-0">
-              <TypedText strings={[name]} loop={false} typeSpeed={100} />
-            </h1>
-            <div className="title-container">
-              <HeaderTitleTypeAnimation />
-            </div>
-            <ReactSwitch
-              checked={checked}
-              onChange={onThemeSwitchChange}
-              offColor="#baaa80"
-              onColor="#353535"
-              className="react-switch mx-auto"
-              width={90}
-              height={40}
-              uncheckedIcon={
-                <Icon
-                  icon="twemoji:owl"
-                  style={{
-                    display: "block",
-                    height: "100%",
-                    fontSize: 25,
-                    textAlign: "end",
-                    marginLeft: "20px",
-                    color: "#353239",
-                  }}
-                />
-              }
-              checkedIcon={
-                <Icon
-                  icon="noto:sun-with-face"
-                  style={{
-                    display: "block",
-                    height: "100%",
-                    fontSize: 25,
-                    textAlign: "end",
-                    marginLeft: "10px",
-                    color: "#353239",
-                  }}
-                />
-              }
-              id="icon-switch"
-            />
-          </div>
+    <header id="home" className="hero">
+      <div className="hero-statusbar">
+        <span className="hero-statusbar-item">
+          <Icon icon="la:laptop-code" className="header-icon" />
+          <span>victorandra.de</span>
+        </span>
+        <span className="hero-statusbar-sep">·</span>
+        <span className="hero-statusbar-item">
+          <span className="hero-pulse" /> deployed
+        </span>
+        <span className="hero-statusbar-sep hero-statusbar-optional">·</span>
+        <span className="hero-statusbar-item mono hero-statusbar-optional">
+          main@1285824
+        </span>
+        <span className="hero-statusbar-sep hero-statusbar-optional">·</span>
+        <span className="hero-statusbar-item mono hero-statusbar-optional">
+          v2026.05
+        </span>
+      </div>
+
+      <div className="hero-greeting">
+        <span className="hero-greeting-mono">{'>'} hello, world.</span>
+      </div>
+
+      <h1 className="hero-name">
+        <TypedText strings={[name]} loop={false} typeSpeed={100} />
+      </h1>
+
+      <div className="hero-role title-container">
+        <span className="hero-role-prompt">role:</span>
+        <HeaderTitleTypeAnimation />
+      </div>
+
+      <div className="hero-actions">
+        <div className="hero-theme">
+          <ReactSwitch
+            checked={checked}
+            onChange={onThemeSwitchChange}
+            offColor="#e5e5e5"
+            onColor="#16a34a"
+            offHandleColor="#16a34a"
+            onHandleColor="#bbf7d0"
+            className="react-switch"
+            width={56}
+            height={28}
+            handleDiameter={22}
+            uncheckedIcon={false}
+            checkedIcon={false}
+            id="icon-switch"
+          />
+          <code className="hero-theme-label">
+            {checked ? '--theme=dark' : '--theme=light'}
+          </code>
+        </div>
+        <div className="hero-meta">
+          <span className="hero-meta-key">uptime:</span>
+          <span className="hero-meta-val">{uptime}</span>
         </div>
       </div>
     </header>

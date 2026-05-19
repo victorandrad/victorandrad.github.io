@@ -1,10 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Badge from "react-bootstrap/Badge";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement
-} from 'react-vertical-timeline-component';
-import 'react-vertical-timeline-component/style.min.css';
 
 interface ExperienceProps {
   resumeBasicInfo: any;
@@ -13,93 +7,62 @@ interface ExperienceProps {
 
 export default function Experience({ resumeBasicInfo, resumeExperience }: ExperienceProps) {
   const [sectionName, setSectionName] = useState('');
-  const [work, setWork] = useState('');
+  const [items, setItems] = useState<any>(null);
 
   useEffect(() => {
     if (resumeExperience && resumeBasicInfo) {
       setSectionName(resumeBasicInfo.section_name.experience);
-  
-      setWork(resumeExperience.map((work: any, i: any) => {
-        const technologies = work.technologies;
-        const mainTechnologies = work.mainTech;
-  
-        let mainTech = mainTechnologies.map((technology: any, i: any) => {
-          return (
-            <Badge pill className="main-badge mr-2 mb-2" key={i}>
-              {technology}
-            </Badge>
-          );
-        });
-  
-        let tech = technologies.map((technology: any, i: any) => {
-          return (
-            <Badge pill className="experience-badge mr-2 mb-2" key={i}>
-              {technology}
-            </Badge>
-          );
-        });
-  
+
+      setItems(resumeExperience.map((work: any, i: number) => {
+        const technologies = work.technologies || [];
+        const mainTechnologies = work.mainTech || [];
+        const isCurrent = i === 0;
+
+        const mainTech = mainTechnologies.map((tech: string, j: number) => (
+          <span className="exp-main-badge" key={`m-${j}`}>{tech}</span>
+        ));
+
+        const tech = technologies.map((technology: string, j: number) => (
+          <span className="exp-badge" key={`t-${j}`}>{technology}</span>
+        ));
+
         return (
-          <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            date={work.years}
-            iconStyle={{
-              background: "#AE944F",
-              color: "#fff",
-              textAlign: "center",
-            }}
-            icon={<i className={`fab experience-icon . ${work.class}`}></i>}
-            key={i}
-          >
-            <div style={{ textAlign: "left", marginBottom: "4px" }}>
-              {mainTech}
+          <article className="exp-item" key={i}>
+            <div className="exp-when">
+              <span className="exp-when-marker" aria-hidden>
+                {isCurrent ? '●' : '○'}
+              </span>
+              <span className="exp-when-text">{work.years}</span>
+              {isCurrent && <span className="exp-now">NOW</span>}
             </div>
-  
-            <h3
-              className="vertical-timeline-element-title"
-              style={{ textAlign: "left" }}
-            >
-              {work.title}
-            </h3>
-            <h4
-              className="vertical-timeline-element-subtitle"
-              style={{ textAlign: "left" }}
-            >
-              {work.company}
-            </h4>
-            <div style={{ textAlign: "left", marginTop: "15px" }}>{tech}</div>
-          </VerticalTimelineElement>
+            <div className="exp-body">
+              <div className="exp-main-tags">{mainTech}</div>
+              <h3 className="exp-title">{work.title}</h3>
+              <h4 className="exp-company">
+                <span className="exp-company-prompt">@</span>
+                {work.company}
+              </h4>
+              <div className="exp-tags">{tech}</div>
+            </div>
+          </article>
         );
       }));
     }
-  }, [resumeBasicInfo, resumeExperience])
+  }, [resumeBasicInfo, resumeExperience]);
 
   return (
-    <section id="resume" className="pb-5">
-      <div className="col-md-12 mx-auto">
-        <div className="col-md-12">
-          <h1 className="section-title" style={{ color: "black" }}>
-            <span className="text-black" style={{ textAlign: "center" }}>
-              {sectionName}
-            </span>
-          </h1>
-        </div>
-      </div>
-      <div className="col-md-8 mx-auto">
-        <VerticalTimeline>
-          {work}
-          <VerticalTimelineElement
-            iconStyle={{
-              background: "#AE944F",
-              color: "#fff",
-              textAlign: "center",
-            }}
-            icon={
-              <i className="fas fa-hourglass-start mx-auto experience-icon"></i>
-            }
-          />
-        </VerticalTimeline>
-      </div>
+    <section id="resume" className="card card-experience">
+      <header className="card-head">
+        <span className="card-file">
+          <span className="card-file-icon">$</span>
+          <span className="card-file-name">experience.log</span>
+        </span>
+        <span className="card-num">04</span>
+        <h1 className="card-title"><span>{sectionName}</span></h1>
+        <span className="card-tag">LOG</span>
+      </header>
+
+      <div className="exp-list">{items}</div>
     </section>
   );
 }

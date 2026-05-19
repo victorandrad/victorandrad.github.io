@@ -15,40 +15,37 @@ export default function ProjectDetailsModal(props: ProjectDetailsProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
-  const [tech, setTech] = useState('');
-  const [img, setImg] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [tech, setTech] = useState<any>(null);
+  const [img, setImg] = useState<any>(null);
 
   useEffect(() => {
     if (props.data) {
       const technologies = props.data.technologies;
       const images = props.data.images;
-  
-      setTitle(props.data.title);
-      setDescription(props.data.description);
-      setUrl(props.data.url);
-  
-      if (props.data.technologies) {
-        setTech(technologies.map((icons: any, i: any) => {
-          return (
-            <li className="list-inline-item mx-3" key={i}>
-              <span>
-                <div className="text-center">
-                  <i className={icons.class} style={{ fontSize: "300%" }}>
-                    <p className="text-center" style={{ fontSize: "30%" }}>
-                      {icons.name}
-                    </p>
-                  </i>
-                </div>
-              </span>
-            </li>
-          );
-        }));
-  
-        if (props.data.images) {
-          setImg(images.map((elem: any, i: any) => {
-            return <div key={i} data-src={elem} />;
-          }));
-        }
+
+      setTitle(props.data.title || '');
+      setDescription(props.data.description || '');
+      setUrl(props.data.url || '');
+      setStartDate(props.data.startDate || '');
+
+      if (technologies) {
+        setTech(technologies.map((icons: any, i: any) => (
+          <li className="modal-tech-pill" key={i}>
+            <i className={`${icons.class} modal-tech-icon`} aria-hidden></i>
+            <span className="modal-tech-name">{icons.name}</span>
+          </li>
+        )));
+      } else {
+        setTech(null);
+      }
+
+      if (images) {
+        setImg(images.map((elem: any, i: any) => (
+          <div key={i} data-src={elem} />
+        )));
+      } else {
+        setImg(null);
       }
     }
   }, [props]);
@@ -59,32 +56,36 @@ export default function ProjectDetailsModal(props: ProjectDetailsProps) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      className="modal-inside"
+      className="modal-inside project-modal"
     >
-      <span onClick={props.onHide} className="modal-close">
-        <i className="fas fa-times fa-3x close-icon"></i>
-      </span>
-      <div className="col-md-12">
-        <div className="col-md-10 mx-auto" style={{ paddingBottom: "50px" }}>
+      <header className="project-modal-head">
+        <span className="card-file">
+          <span className="card-file-icon">{'<>'}</span>
+          <span className="card-file-name">project.tsx</span>
+        </span>
+        {startDate && (
+          <span className="project-modal-date mono">{startDate}</span>
+        )}
+        <span className="project-modal-status">
+          <span className="project-status-dot" />
+          shipped
+        </span>
+        <button
+          type="button"
+          onClick={props.onHide}
+          className="project-modal-close"
+          aria-label="Close"
+        >
+          <i className="fas fa-times close-icon"></i>
+        </button>
+      </header>
+
+      <div className="project-modal-scroll">
+        <div className="project-modal-slider">
           <div className="slider-tab">
-            <span
-              className="iconify slider-iconfiy"
-              data-icon="emojione:red-circle"
-              data-inline="false"
-              style={{ marginLeft: "5px" }}
-            ></span>{" "}
-            &nbsp;{" "}
-            <span
-              className="iconify slider-iconfiy"
-              data-icon="twemoji:yellow-circle"
-              data-inline="false"
-            ></span>{" "}
-            &nbsp;{" "}
-            <span
-              className="iconify slider-iconfiy"
-              data-icon="twemoji:green-circle"
-              data-inline="false"
-            ></span>
+            <span className="slider-tab-dot dot-r" />
+            <span className="slider-tab-dot dot-y" />
+            <span className="slider-tab-dot dot-g" />
           </div>
           <AwesomeSlider
             cssModule={[AwesomeSliderStyles, AwesomeSliderStyles2]}
@@ -94,27 +95,31 @@ export default function ProjectDetailsModal(props: ProjectDetailsProps) {
             {img}
           </AwesomeSlider>
         </div>
-        <div className="col-md-10 mx-auto">
-          <h3 style={{ padding: "5px 5px 0 5px" }}>
-            {title}
-            {url ? (
+
+        <div className="project-modal-body">
+          <h3 className="project-modal-title">{title}</h3>
+          <p className="modal-description">{description}</p>
+
+          {tech && (
+            <div className="project-modal-meta">
+              <span className="project-modal-meta-label">$ stack</span>
+              <ul className="modal-tech-list">{tech}</ul>
+            </div>
+          )}
+
+          {url && (
+            <div className="project-modal-actions">
               <a
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-href"
+                className="project-modal-cta"
               >
-                <i
-                  className="fas fa-external-link-alt"
-                  style={{ marginLeft: "10px" }}
-                ></i>
+                <span>view live</span>
+                <span aria-hidden>↗</span>
               </a>
-            ) : null}
-          </h3>
-          <p className="modal-description">{description}</p>
-          <div className="col-md-12 text-center">
-            <ul className="list-inline mx-auto">{tech}</ul>
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </Modal>
