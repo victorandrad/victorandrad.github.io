@@ -11,6 +11,24 @@
   },
   "projects": [
     {
+      "title": "Gestão de Carnês",
+      "startDate": "2026",
+      "description": "Sistema que permite a igrejas administrarem campanhas de sorteio em que fiéis compram carnês parcelados e concorrem ao quitar todas as parcelas. Substitui o controle manual em planilhas e papéis, registrando pagamentos em dinheiro ou Pix, gerando carnês sob demanda e acompanhando a quitação parcela a parcela. Construído em Angular 18 e NestJS sobre PostgreSQL e Prisma, traz uma cartela de números virtualizada que escala para milhares de carnês por campanha e relatórios consolidados de arrecadação em tempo real.",
+      "images": [
+        "images/portfolio/controle-carnes/p1.png",
+        "images/portfolio/controle-carnes/p2.png"
+      ],
+      "url": "https://gestaocampanha.victorandra.de",
+      "technologies": [
+        { "class": "devicon-angularjs-plain", "name": "Angular" },
+        { "class": "devicon-typescript-plain", "name": "TypeScript" },
+        { "class": "devicon-nodejs-plain", "name": "NestJS" },
+        { "class": "devicon-postgresql-plain", "name": "PostgreSQL" },
+        { "class": "devicon-docker-plain", "name": "Docker" }
+      ],
+      "mainTech": ["Angular", "NestJS", "PostgreSQL"]
+    },
+    {
       "title": "Podcastr",
       "startDate": "2021",
       "description": "É uma aplicação desenvolvida em ReactJS através da NLW#5, onde foi integrado o NextJS para gerar páginas estáticas, nessa aplicação foram usados conceitos de estado, rotas, componentes e contextos. É basicamente um aplicativo para ouvir podcasts com controlador de player, e exibir detalhes do podcast.",
