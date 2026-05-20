@@ -1836,7 +1836,8 @@ header h1.hero-name {
   max-width: min(960px, 94vw);
   width: min(960px, 94vw);
   height: auto;
-  max-height: 92vh;
+  max-height: 92vh; /* fallback for browsers without dvh */
+  max-height: 92dvh; /* accounts for mobile browser chrome (address bar) */
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -1851,6 +1852,7 @@ header h1.hero-name {
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   max-height: 92vh;
+  max-height: 92dvh;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -2126,6 +2128,20 @@ header h1.hero-name {
 .loader-bar-color { color: var(--accent) !important; }
 
 @media (max-width: 575px) {
+  /* Tighter caps + dvh so the modal never overflows the visible area on mobile */
+  .modal-inside .modal-dialog {
+    max-width: 94vw;
+    width: 94vw;
+    max-height: 88vh;
+    max-height: 88dvh;
+    margin: 0 auto;
+  }
+  .modal-inside .modal-content {
+    max-height: 88vh;
+    max-height: 88dvh;
+    border-radius: var(--radius-lg);
+  }
+
   .project-modal-head { padding: 0.7rem 0.8rem; gap: 0.5rem; }
   .project-modal-slider { padding: 0.9rem 1rem 0; }
   .project-modal-body { padding: 1.4rem 1.4rem 1.8rem; gap: 1.2rem; }
