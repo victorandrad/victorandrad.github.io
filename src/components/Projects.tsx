@@ -14,10 +14,6 @@ export default function Projects({ resumeProjects, resumeBasicInfo }: ProjectsPr
 
   useEffect(() => {
     setSectionName(resumeBasicInfo?.section_name.projects);
-    if (resumeProjects?.[0] && !detailsModalShowState) {
-      setDeps(resumeProjects[0]);
-      setDetailsModalShowState(true);
-    }
     setProjects(resumeProjects?.map((project: any, idx: number) => {
       const num = String(idx + 1).padStart(2, '0');
       return (
